@@ -42,11 +42,12 @@ function handle401(
     refreshInProgress = true;
     refreshSubject.next(null);
     return auth.refresh().pipe(
-      switchMap(({ accessToken }: any) => {
+      switchMap(({ token }: any) => {
         refreshInProgress = false;
-        refreshSubject.next(accessToken);
-        const retryReq = accessToken
-          ? req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` }, withCredentials: true })
+        refreshSubject.next(token);
+        console.log('Token refreshed', token);
+        const retryReq = token
+          ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` }, withCredentials: true })
           : req.clone({ withCredentials: true });
         return next(retryReq);
       }),

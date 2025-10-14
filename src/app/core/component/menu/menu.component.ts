@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../shared/service/auth.service';
 
 @Component({
@@ -11,7 +11,16 @@ import { AuthService } from '../../../shared/service/auth.service';
 })
 export class MenuComponent {
   authService = inject(AuthService);
-  logout() {
+  router = inject(Router);
 
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,9 @@ export class AuthService {
   }
   refresh() {
     return this.http.post('/auth/refresh', null, { withCredentials: true }).pipe(
-      map((r: any) => {
+      tap((r: any) => {
         this.token.set(r.token);
         this.payload.set(this.decodeJwt(r.token));
-        return {};
       })
     );
   }
