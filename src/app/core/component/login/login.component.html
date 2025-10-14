@@ -1,0 +1,32 @@
+<div class="form">
+    <form [formGroup]="myForm">
+        <div class="mb-3">
+            <label for="adi" class="form-label">Kullanıcı adı</label>
+            <input formControlName="adi" type="text" class="form-control"
+                [class.is-invalid]="myForm.controls['adi'].invalid &&  myForm.controls['adi'].touched" id="adi"
+                name="adi" />
+            @if(myForm.controls['adi'].invalid && myForm.controls['adi'].touched) {
+            @if(myForm.controls['adi'].errors!['required']) {
+            <div><small class="text-danger">Adı alanını boş geçemezsiniz</small></div>
+            }
+            @if(myForm.controls['adi'].errors!['minlength']) {
+            <div><small class="text-danger">Adı alanını en az 2 karakter olmalıdır</small></div>
+            }
+            }
+        </div>
+        <div class="mb-3">
+            <label for="sifre" class="form-label">Şifre</label>
+            <input [class.is-invalid]="myForm.controls['sifre'].invalid &&  myForm.controls['sifre'].touched"
+                formControlName="sifre" type="text" class="form-control" id="sifre" name="sifre" />
+            @if(myForm.controls['sifre'].invalid && myForm.controls['sifre'].touched) {
+            @if(myForm.controls['sifre'].errors!['required']) {
+            <div><small class="text-danger">Şifre alanını boş geçemezsiniz</small></div>
+            }
+            @if(myForm.controls['sifre'].errors!['minlength']) {
+            <div><small class="text-danger">Şifre alanını en az 2 karakter olmalıdır</small></div>
+            }
+            }
+        </div>
+        <button [disabled]="myForm.invalid" (click)="login()" type="button" class="btn btn-primary">Giriş</button>
+    </form>
+</div>

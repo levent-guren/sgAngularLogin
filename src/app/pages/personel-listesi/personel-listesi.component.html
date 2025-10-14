@@ -1,0 +1,23 @@
+<div>
+    @if (personelListesi.length == 0) {
+    <p>Yükleniyor...</p>
+    } @else {
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Adı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (personel of personelListesi; track personel.adi) {
+            <tr>
+                <td>{{personel.adi}}</td>
+            </tr>
+            }   
+        </tbody>
+    </table>
+    }
+    <div>
+        <button class="btn btn-primary mt-3" [routerLink]="['/menu']">Menü</button>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div>
+    <div><button class="btn btn-info" [routerLink]="['/personelListesi']">Personel Listesi</button></div>
+    @if (authService.hasRole('admin')) {
+    <div><button class="btn btn-info mt-3 " [routerLink]="['/personelListesi']">Admin Panel</button></div>
+    }
+    <div><button class="btn btn-danger mt-3" (click)="logout()">Logout</button></div>
+</div>
