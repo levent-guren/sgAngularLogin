@@ -10,10 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const token = authService.token();
   // Sadece auth endpointlerini hariç tut
-  const isAuthEndpoint =
-    req.url.startsWith('http://localhost:8080/api/v1/auth/login')
-    || req.url.startsWith('http://localhost:8080/api/v1/auth/refresh')
-    || req.url.startsWith('http://localhost:8080/api/v1/auth/logout');
+  const isAuthEndpoint = req.url.startsWith('http://localhost:8080/api/v1/auth/');
 
   if (token && token != '' && !isAuthEndpoint) {
     req = req.clone({

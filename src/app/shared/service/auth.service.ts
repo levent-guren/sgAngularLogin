@@ -11,7 +11,7 @@ export class AuthService {
   payload = signal<any | null>(null);
 
   login(adi: string, sifre: string) {
-    return this.http.post('/auth/login', { adi, sifre }).pipe(
+    return this.http.post('/auth/login', { adi, sifre }, { withCredentials: true }).pipe(
       map((r: any) => {
         this.token.set(r.token);
         this.payload.set(this.decodeJwt(r.token));
@@ -30,7 +30,7 @@ export class AuthService {
   }
   logout() {
     this.token.set('');
-    return this.http.post('/auth/logout', null);
+    return this.http.post('/auth/logout', null, { withCredentials: true });
   }
   hasRole(role: string): boolean {
     const roles: string[] = this.payload()?.roller || [];
